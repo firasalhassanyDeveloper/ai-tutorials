@@ -1,5 +1,8 @@
 package nl.mandq.prompttemplates.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +12,7 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -67,24 +71,22 @@ public class ChatController {
         }
     }
 
-    record SuggestedPlan(@NotNull String topic, @NotNull int numberOfPoints) {
+    record SuggestedPlan(@NotBlank String topic, @Min(1) int numberOfPoints) {
+    }
+
+    record Plan(List<String> points) {
     }
 
     @PostMapping("/suggest-plan")
-    public String suggestPlan(@RequestBody SuggestedPlan plan) throws IOException {
-        if (plan == null || plan.topic() == null || plan.topic().isBlank()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "plan cannot be empty");
-        }
-
+    public Plan suggestPlan(@Valid  @RequestBody SuggestedPlan plan) throws IOException {
         String scrumSystem = scrumMasterResources.getContentAsString(StandardCharsets.UTF_8);
         Message message = getMessage(plan);
-        Prompt prompt = new Prompt(List.of(message, new SystemMessage(scrumSystem)));
+        Prompt prompt = new Prompt(List.of(new SystemMessage(scrumSystem), message));
         try {
-            return chatClient.prompt(prompt)
+            return chatClient
+                    .prompt(prompt)
                     .call()
-                    .content();
+                    .entity(Plan.class);
         } catch (Exception e) {
             logger.error("Chat request failed", e);
             throw new ResponseStatusException(
@@ -106,8 +108,10 @@ public class ChatController {
                 - Each point should be a short, concise sentence.
                 - Avoid duplicates.
                 - Return only the list of discussion points.
+                {format}
                 """);
-        Map<String, Object> vars = Map.of("topic", plan.topic, "count", plan.numberOfPoints);
+        Map<String, Object> vars = Map.of("topic", plan.topic, "count", plan.numberOfPoints,
+                "format", new BeanOutputConverter<>(Plan.class).getFormat());
         return promptTemplate.createMessage(vars);
     }
 }
