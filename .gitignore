@@ -1,0 +1,61 @@
+# =========================
+# Maven / Gradle build output
+# =========================
+target/
+build/
+out/
+
+# =========================
+# IDEs
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+
+.vscode/
+.settings/
+.project
+.classpath
+
+# =========================
+# Spring Boot / Java
+# =========================
+*.log
+
+# Compiled class files
+*.class
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment & secrets
+# =========================
+.env
+*.env
+application-local.yml
+application-dev.yml
+
+# Common secret/config overrides
+application-secrets.yml
+
+# =========================
+# Spring Boot temp files
+# =========================
+*.pid
+*.lock
+
+# =========================
+# Logs & runtime data
+# =========================
+logs/
+*.log.*
+
+# =========================
+# Docker (optional but common)
+# =========================
+docker-compose.override.yml
