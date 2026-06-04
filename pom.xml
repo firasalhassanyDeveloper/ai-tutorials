@@ -11,6 +11,7 @@
 
     <modules>
         <module>spring-ai-model-runner</module>
+        <module>prompt-templates</module>
     </modules>
 
     <properties>
