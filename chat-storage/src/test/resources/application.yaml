@@ -1,0 +1,6 @@
+spring:
+  ai:
+    chat:
+      memory:
+        jdbc:
+          enabled: false
