@@ -9,6 +9,7 @@
         <module name="spring-ai-model-runner" />
         <module name="chat-storage" />
         <module name="prompt-templates" />
+        <module name="rag-storage" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +21,7 @@
       <module name="chat-storage" options="" />
       <module name="demo" options="-parameters" />
       <module name="prompt-templates" options="" />
+      <module name="rag-storage" options="" />
       <module name="spring-ai-model-runner" options="" />
     </option>
   </component>

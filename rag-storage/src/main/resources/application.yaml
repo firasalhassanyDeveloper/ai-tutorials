@@ -1,0 +1,27 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  ai:
+    openai:
+      api-key: ""
+      chat:
+        base-url: "http://localhost:12434/v1"
+        options:
+          model: "ai/gemma3"
+      embedding:
+        base-url: http://localhost:12434/v1
+        options:
+          model:  "ai/nomic-embed-text-v2-moe"
+    vectorstore:
+      redis:
+        initialize-schema: true
+        index-name: custom-index
+        prefix: custom-prefix
+
+
+
+logging:
+  level:
+    org.springframework.ai: DEBUG

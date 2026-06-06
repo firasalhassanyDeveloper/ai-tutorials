@@ -13,6 +13,7 @@
         <module>spring-ai-model-runner</module>
         <module>prompt-templates</module>
         <module>chat-storage</module>
+        <module>rag-storage</module>
     </modules>
 
     <properties>
