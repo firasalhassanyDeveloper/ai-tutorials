@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-ai-model-runner" />
         <module name="chat-storage" />
+        <module name="tool-calling" />
         <module name="prompt-templates" />
         <module name="rag-storage" />
       </profile>
@@ -23,6 +24,7 @@
       <module name="prompt-templates" options="" />
       <module name="rag-storage" options="" />
       <module name="spring-ai-model-runner" options="" />
+      <module name="tool-calling" options="" />
     </option>
   </component>
 </project>

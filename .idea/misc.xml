@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/prompt-templates/pom.xml" />
         <option value="$PROJECT_DIR$/chat-storage/pom.xml" />
         <option value="$PROJECT_DIR$/rag-storage/pom.xml" />
+        <option value="$PROJECT_DIR$/tool-calling/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -1,0 +1,8 @@
+spring:
+  ai:
+    openai:
+      api-key: ""
+      chat:
+        base-url: "http://localhost:12434/v1"
+        options:
+          model: "ai/gemma3"
